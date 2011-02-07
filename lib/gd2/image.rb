@@ -98,6 +98,7 @@ module GD2
           :png  => :gdImageCreateFromPng,
           :gif  => :gdImageCreateFromGif,
           :wbmp => :gdImageCreateFromWBMP,
+          :gd   => :gdImageCreateFromGd,
           :gd2  => :gdImageCreateFromGd2
         }
         args = [src.to_ptr]
@@ -108,6 +109,7 @@ module GD2
           :png  => :gdImageCreateFromPngPtr,
           :gif  => :gdImageCreateFromGifPtr,
           :wbmp => :gdImageCreateFromWBMPPtr,
+          :gd   => :gdImageCreateFromGdPtr,
           :gd2  => :gdImageCreateFromGd2Ptr
         }
         args = [src.length, src]
@@ -138,6 +140,8 @@ module GD2
         :gif
       when /\A\x00/
         :wbmp
+      when /\xff\xfe/
+        :gd
       when /\Agd2/
         :gd2
       end
